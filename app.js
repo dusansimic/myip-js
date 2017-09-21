@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const internalIp = require('internal-ip');
 const publicIp = require('public-ip');
 const program = require('commander');
@@ -11,7 +13,7 @@ program
 	.option('-6, --ip6', 'Get version 6 ips only')
 	.parse(process.argv);
 
-let options = {
+const options = {
 	get4: true,
 	get6: true,
 	getLocal: true,

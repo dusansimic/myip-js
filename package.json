@@ -2,8 +2,13 @@
   "name": "myip-js",
   "version": "0.0.1",
   "description": "Get global and local ips.",
+  "bin": {
+    "myip": "./app.js"
+  },
   "main": "app.js",
+  "preferGlobal": true,
   "author": "Dušan Simić",
+	"repository": "https://github.com/dusansimic/myip-js.git",
   "license": "MIT",
   "dependencies": {
     "commander": "^2.11.0",
