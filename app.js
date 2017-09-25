@@ -75,7 +75,11 @@ if (options.getGlobal) {
 		publicIp.v6().then(ip => {
 			console.log('Global v6: ' + ip);
 		}).catch(err => {
-			console.error(err);
+			if (err.toString().startsWith('Error: Query timed out')) {
+				console.log('Global v6: (Error: Query timed out)');
+			} else {
+				console.error(err);
+			}
 		});
 	}
 }
