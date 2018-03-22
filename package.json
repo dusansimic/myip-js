@@ -1,18 +1,20 @@
 {
   "name": "myip-js",
-  "version": "0.0.1",
-  "description": "Get global and local ips.",
+  "version": "0.0.2",
+  "description": "Get global and local IP's.",
   "bin": {
     "myip": "./app.js"
   },
   "main": "app.js",
   "preferGlobal": true,
-  "author": "Dušan Simić",
-	"repository": "https://github.com/dusansimic/myip-js.git",
+  "author": "Dušan Simić <dusan.simic1810@gmail.com> (http://dusansimic.me)",
+  "repository": "https://github.com/dusansimic/myip-js.git",
   "license": "MIT",
   "dependencies": {
-    "commander": "^2.11.0",
+    "chalk": "^2.3.2",
     "internal-ip": "^2.0.3",
-    "public-ip": "^2.3.5"
+    "meow": "^4.0.0",
+    "public-ip": "^2.3.5",
+    "update-notifier": "^2.3.0"
   }
 }

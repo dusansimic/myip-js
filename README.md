@@ -7,7 +7,11 @@ This is a cli tool that can be used to get local/global IP address, whether it's
 It can be installed with npm, a package manager that comes with Node.js.
 
 ```bash
-$ npm install myip-js
+$ npm i -g myip-js
+```
+or with yarn
+```bash
+$ yarn global add myip-js
 ```
 
 On some OS' you will need to run it with sudo.

@@ -2,16 +2,46 @@
 
 const internalIp = require('internal-ip');
 const publicIp = require('public-ip');
-const program = require('commander');
+const meow = require('meow');
+const chalk = require('chalk');
+const updateNotifier = require('update-notifier');
 
-program
-	.version('0.0.1')
-	.option('-a, --all', 'Get all ips')
-	.option('-l, --local', 'Get local ips only')
-	.option('-g, --global', 'Get global ips only')
-	.option('-4, --ip4', 'Get version 4 ips only')
-	.option('-6, --ip6', 'Get version 6 ips only')
-	.parse(process.argv);
+const cli = meow(`
+	Usage
+		$ ${chalk.yellow('myip')} [options]
+
+	Options
+		--version      Get version number
+		-a, --all      Get all IP's
+		-l, --local    Get local IP's only
+		-g, --global   Get global IP's only
+		-4, --ip4      Get version 4 IP's only
+		-6, --ip6      Get Version 6 IP's only
+		--help         Get this help`, {
+	autoHelp: true,
+	flags: {
+		all: {
+			type: 'boolean',
+			alias: 'a'
+		},
+		local: {
+			type: 'boolean',
+			alias: 'l'
+		},
+		global: {
+			type: 'boolean',
+			alias: 'g'
+		},
+		ip4: {
+			type: 'boolean',
+			alias: '4'
+		},
+		ip6: {
+			type: 'boolean',
+			alias: '6'
+		}
+	}
+});
 
 const options = {
 	get4: true,
@@ -22,30 +52,19 @@ const options = {
 
 // Getting user inserted settings
 
-if (program.local) {
+if (cli.flags.local) {
 	options.getGlobal = false;
-	options.getLocal = true;
-} else if (program.global) {
-	options.getGlobal = true;
+} else if (cli.flags.global) {
 	options.getLocal = false;
 }
 
-if (program.ip4) {
-	options.get4 = true;
+if (cli.flags.ip4) {
 	options.get6 = false;
-} else if (program.ip6) {
+} else if (cli.flags.ip6) {
 	options.get4 = false;
-	options.get6 = true;
 }
 
-if (program.all) {
-	options.get4 = true;
-	options.get6 = true;
-	options.getLocal = true;
-	options.getGlobal = true;
-}
-
-// Getting ips
+// Getting IP's
 
 if (options.getLocal) {
 	if (options.get4) {
@@ -83,3 +102,7 @@ if (options.getGlobal) {
 		});
 	}
 }
+
+const pkg = require('./package.json');
+const notifier = updateNotifier({pkg});
+notifier.notify();
